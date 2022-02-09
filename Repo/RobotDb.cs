@@ -1,13 +1,18 @@
-﻿using RestApi.Models;
+﻿using RestApi.Data;
+using RestApi.Models;
 
 namespace RestApi.Repo
 {
-    public class InMemRobotRepo : IRobot
+    public class RobotDb : IRobot
     {
         private List<Robot> _robots;
-        public InMemRobotRepo() {
-            _robots = new() { new Robot { Id = Guid.NewGuid(), Name = "5G throwaBot", IsActive = true, MaxSpeed = false , X=0, Y=0 } };
+
+        private readonly AppDbContext _db;
+        public RobotDb(AppDbContext db)
+        {
+            _db = db;
         }
+
         public void CreateRobot(Robot robot)
         {
             _robots.Add(robot);
@@ -29,7 +34,7 @@ namespace RestApi.Repo
 
         public IEnumerable<Robot> GetRobots()
         {
-           return _robots;
+           return _db.Robots;
         }
 
         public void MoveRobot(Guid id, Robot robot)
