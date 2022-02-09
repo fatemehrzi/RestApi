@@ -15,20 +15,22 @@ namespace RestApi.Repo
 
         public void CreateRobot(Robot robot)
         {
-            _robots.Add(robot);
+            robot.Id= Guid.NewGuid();
+            _db.Robots.Add(robot);
+            _db.SaveChanges();
            
         }
 
         public void DeleteRobot(Guid id)
         {
-            var robotIndex = _robots.FindIndex(x => x.Id == id);
-            if (robotIndex > -1)
-                _robots.RemoveAt(robotIndex);
+            var robot = _db.Robots.Where(x => x.Id.ToString() == id.ToString()).FirstOrDefault();
+            _db.Robots.Remove(robot);
+            _db.SaveChanges();
         }
 
         public Robot GetRobot(Guid id)
         {
-            var robot = _robots.Where(x=>x.Id==id).SingleOrDefault();
+            var robot = _db.Robots.Where(x=>x.Id.ToString() == id.ToString()).SingleOrDefault();
             return robot;   
         }
 

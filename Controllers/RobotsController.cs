@@ -39,13 +39,14 @@ namespace RestApi.Controllers
         [HttpPost]
         public ActionResult CreateRobot(CreateOrMoveRobotDTO robot)
         {
-            var myRobot=new Robot();
-            myRobot.Id= Guid.NewGuid();
-            myRobot.Name = robot.Name;
-            myRobot.IsActive = robot.IsActive;
-            myRobot.MaxSpeed = robot.MaxSpeed;
-            myRobot.X = robot.X;
-            myRobot.Y = robot.Y;
+            var myRobot = new Robot
+            {
+                Name = robot.Name,
+                IsActive = robot.IsActive,
+                MaxSpeed = robot.MaxSpeed,
+                X = robot.X,
+                Y = robot.Y
+            };
 
             _RobotRepo.CreateRobot(myRobot);
 
@@ -73,10 +74,6 @@ namespace RestApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteRobot(Guid id) 
         {
-            var myRobot = _RobotRepo.GetRobot(id);
-
-            if (myRobot == null)
-                return NotFound();
             _RobotRepo.DeleteRobot(id);
             return Ok();
         }
