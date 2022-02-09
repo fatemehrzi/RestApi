@@ -37,7 +37,7 @@ namespace RestApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateRobot(CreateOrMoveRobotDTO robot)
+        public ActionResult CreateRobot(CreateRobotDTO robot)
         {
             var myRobot = new Robot
             {
@@ -53,20 +53,11 @@ namespace RestApi.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public ActionResult MoveRobot(Guid id,CreateOrMoveRobotDTO robot)
+        [HttpPut]
+        public ActionResult MoveRobot([FromBody] MoveRobotDTO robot)
         {
-            var myRobot = _RobotRepo.GetRobot(id);
 
-            if (myRobot==null)
-                return NotFound();
-            myRobot.Name = robot.Name;
-            myRobot.IsActive = robot.IsActive;
-            myRobot.MaxSpeed = robot.MaxSpeed;
-            myRobot.X= robot.X;
-            myRobot.Y= robot.Y;
-
-            _RobotRepo.MoveRobot(id,myRobot);
+            _RobotRepo.MoveRobot(robot.Id, robot.MaxSpeed, robot.X, robot.Y);
 
             return Ok();
         }

@@ -39,11 +39,13 @@ namespace RestApi.Repo
            return _db.Robots;
         }
 
-        public void MoveRobot(Guid id, Robot robot)
+        public void MoveRobot(Guid id,bool maxSpeed,double x,double y)
         {
-            var robotIndex=_robots.FindIndex(x=>x.Id==id);
-            if(robotIndex>-1)
-                _robots[robotIndex]= robot;
+            var robot = _db.Robots.Where(x => x.Id.ToString() == id.ToString()).FirstOrDefault();
+            robot.MaxSpeed = maxSpeed;
+            robot.X = x;
+            robot.Y = y;
+            _db.SaveChanges();
            
         }
     }

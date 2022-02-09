@@ -1,9 +1,18 @@
 ﻿namespace RestApi.Dtos
 {
-    public record CreateOrMoveRobotDTO
+    public record CreateRobotDTO
     {
         public string? Name { get; set; }
         public bool IsActive { get; set; }
+        public bool MaxSpeed { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+
+    }
+
+    public record MoveRobotDTO
+    {
+        public Guid Id { get; set; }
         public bool MaxSpeed { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
