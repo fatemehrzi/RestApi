@@ -25,7 +25,7 @@ namespace RestApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<RobotDTO> GetRobots(Guid id)
+        public ActionResult<RobotDTO> GetRobots(int id)
         {
             var robot = _RobotRepo.GetRobot(id);
             if (robot == null)
@@ -63,7 +63,7 @@ namespace RestApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteRobot(Guid id) 
+        public ActionResult DeleteRobot(int id) 
         {
             _RobotRepo.DeleteRobot(id);
             return Ok();

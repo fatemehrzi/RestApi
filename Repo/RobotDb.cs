@@ -15,22 +15,21 @@ namespace RestApi.Repo
 
         public void CreateRobot(Robot robot)
         {
-            robot.Id= Guid.NewGuid();
             _db.Robots.Add(robot);
             _db.SaveChanges();
            
         }
 
-        public void DeleteRobot(Guid id)
+        public void DeleteRobot(int id)
         {
-            var robot = _db.Robots.Where(x => x.Id.ToString() == id.ToString()).FirstOrDefault();
+            var robot = _db.Robots.Where(x => x.Id == id).FirstOrDefault();
             _db.Robots.Remove(robot);
             _db.SaveChanges();
         }
 
-        public Robot GetRobot(Guid id)
+        public Robot GetRobot(int id)
         {
-            var robot = _db.Robots.Where(x=>x.Id.ToString() == id.ToString()).SingleOrDefault();
+            var robot = _db.Robots.Where(x=>x.Id==id).FirstOrDefault();
             return robot;   
         }
 
@@ -39,9 +38,9 @@ namespace RestApi.Repo
            return _db.Robots;
         }
 
-        public void MoveRobot(Guid id,bool maxSpeed,double x,double y)
+        public void MoveRobot(int id,bool maxSpeed,double x,double y)
         {
-            var robot = _db.Robots.Where(x => x.Id.ToString() == id.ToString()).FirstOrDefault();
+            var robot = _db.Robots.Where(z => z.Id == id).FirstOrDefault();
             robot.MaxSpeed = maxSpeed;
             robot.X = x;
             robot.Y = y;

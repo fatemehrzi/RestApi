@@ -12,7 +12,7 @@
 
     public record MoveRobotDTO
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public bool MaxSpeed { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
