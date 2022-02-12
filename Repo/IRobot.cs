@@ -8,7 +8,7 @@ namespace RestApi.Repo
         public Robot GetRobot(int id);
         public void CreateRobot(Robot robot);
         public void MoveRobot(int id, bool maxSpeed, double x, double y);
-        public void DeleteRobot(int id);
+        public Task DeleteRobot(int id);
 
     }
 }

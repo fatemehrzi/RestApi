@@ -5,7 +5,6 @@ namespace RestApi.Repo
 {
     public class RobotDb : IRobot
     {
-        private List<Robot> _robots;
 
         private readonly AppDbContext _db;
         public RobotDb(AppDbContext db)
@@ -20,11 +19,11 @@ namespace RestApi.Repo
            
         }
 
-        public void DeleteRobot(int id)
+        public async Task DeleteRobot(int id)
         {
             var robot = _db.Robots.Where(x => x.Id == id).FirstOrDefault();
             _db.Robots.Remove(robot);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
 
         public Robot GetRobot(int id)

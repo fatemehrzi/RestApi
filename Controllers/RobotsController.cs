@@ -63,9 +63,9 @@ namespace RestApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteRobot(int id) 
+        public async Task<ActionResult> DeleteRobot(int id) 
         {
-            _RobotRepo.DeleteRobot(id);
+            await _RobotRepo.DeleteRobot(id);
             return Ok();
         }
     }
