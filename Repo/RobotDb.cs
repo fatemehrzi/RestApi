@@ -46,5 +46,12 @@ namespace RestApi.Repo
             _db.SaveChanges();
            
         }
+
+        public void AddImage(int id, byte[] fileData) 
+        {
+            var robot = _db.Robots.Where(z => z.Id == id).FirstOrDefault();
+            robot.Image= fileData;
+            _db.SaveChanges();
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace RestApi.Repo
         public void CreateRobot(Robot robot);
         public void MoveRobot(int id, bool maxSpeed, double x, double y);
         public Task DeleteRobot(int id);
+        public void AddImage(int id, byte[] fileData);
 
     }
 }
