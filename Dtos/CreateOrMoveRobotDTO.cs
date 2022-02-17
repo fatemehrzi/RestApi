@@ -8,6 +8,8 @@
         public double X { get; set; }
         public double Y { get; set; }
 
+        public Byte[] Image { get; set; }
+
     }
 
     public record MoveRobotDTO

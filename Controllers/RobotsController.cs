@@ -45,7 +45,8 @@ namespace RestApi.Controllers
                 IsActive = robot.IsActive,
                 MaxSpeed = robot.MaxSpeed,
                 X = robot.X,
-                Y = robot.Y
+                Y = robot.Y,
+                Image=robot.Image
             };
 
             _RobotRepo.CreateRobot(myRobot);
@@ -68,5 +69,13 @@ namespace RestApi.Controllers
             await _RobotRepo.DeleteRobot(id);
             return Ok();
         }
+
+        [HttpPost]
+        [Route("api/upload")]
+        public ActionResult UploadImage(IFormFile file)
+        {
+            return Ok();
+        }
+
     }
 }

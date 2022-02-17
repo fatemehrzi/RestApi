@@ -15,5 +15,7 @@ namespace RestApi.Models
 
         public double Y { get; set; }
 
+        public byte[] Image { get; set; }
+
     }
 }
