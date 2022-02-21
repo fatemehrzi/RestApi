@@ -17,5 +17,7 @@ namespace RestApi.Models
 
         public byte[] Image { get; set; }
 
+        public byte[] Video { get; set; }
+
     }
 }

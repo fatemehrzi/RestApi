@@ -36,6 +36,10 @@ namespace RestApi.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<byte[]>("Video")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
                     b.Property<double>("X")
                         .HasColumnType("REAL");
 

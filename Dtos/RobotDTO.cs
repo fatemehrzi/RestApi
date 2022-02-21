@@ -13,6 +13,9 @@ namespace RestApi.Dtos
         public bool MaxSpeed { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
+        public byte[] Image { get; set; }
+
+        public byte[] Video { get; set; }
 
     }
 }

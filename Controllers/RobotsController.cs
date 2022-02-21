@@ -20,7 +20,7 @@ namespace RestApi.Controllers
         public ActionResult<IEnumerable<RobotDTO>> GetRobots()
         {
             return _RobotRepo.GetRobots()
-                .Select(x => new RobotDTO { Id = x.Id, Name = x.Name, IsActive = x.IsActive, MaxSpeed = x.MaxSpeed, X = x.X, Y = x.Y })
+                .Select(x => new RobotDTO { Id = x.Id, Name = x.Name, IsActive = x.IsActive, MaxSpeed = x.MaxSpeed, X = x.X, Y = x.Y, Image=x.Image, Video=x.Video })
                 .ToList();
         }
 
@@ -31,7 +31,7 @@ namespace RestApi.Controllers
             if (robot == null)
                 return NotFound();
             var robotDTO = new RobotDTO
-            { Id = robot.Id, Name = robot.Name, IsActive = robot.IsActive, MaxSpeed = robot.MaxSpeed, X = robot.X, Y = robot.Y };
+            { Id = robot.Id, Name = robot.Name, IsActive = robot.IsActive, MaxSpeed = robot.MaxSpeed, X = robot.X, Y = robot.Y, Image = robot.Image, Video = robot.Video };
 
             return robotDTO;
         }
@@ -46,7 +46,8 @@ namespace RestApi.Controllers
                 MaxSpeed = robot.MaxSpeed,
                 X = robot.X,
                 Y = robot.Y,
-                Image = robot.Image
+                Image = robot.Image,
+                Video=robot.Video
             };
 
             _RobotRepo.CreateRobot(myRobot);
@@ -76,14 +77,15 @@ namespace RestApi.Controllers
         {
             var id = Convert.ToInt32(Request.Headers["id"]);
             var filePath = Path.Combine(env.ContentRootPath, "Files", file.FileName);
-            //using var stream = System.IO.File.Create(filePath);
-            //stream.Position = 0;
+            using var stream = System.IO.File.Create(filePath);
+            stream.Position = 0;
 
-            using var memory=new MemoryStream();
-            await file.CopyToAsync(memory);
-            _RobotRepo.AddImage(id,memory.ToArray());
+            //using var memory=new MemoryStream();
+            //await file.CopyToAsync(memory);
+            //_RobotRepo.AddImage(id,memory.ToArray());
 
             return Ok();
+        
         }
 
     }
